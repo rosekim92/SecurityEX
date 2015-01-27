@@ -14,7 +14,7 @@ public class FigureController {
 			figureList.add(figure);
 		}
 		MenuBar.menuSee();
-		MenuBar.scan.next();
+		MenuBar.menuKey();
 	}
 	public void searchFigure(){
 		if(figureList.size()==0){
@@ -29,6 +29,6 @@ public class FigureController {
 		System.out.println("==================");
 		}
 		MenuBar.menuSee();
-		MenuBar.scan.next();
+		MenuBar.menuKey();
 	}
 }

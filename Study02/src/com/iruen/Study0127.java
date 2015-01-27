@@ -4,26 +4,21 @@ import java.util.Scanner;
 
 class MenuBar {
 	public static Scanner scan = new Scanner(System.in);
+	static FigureController fgcon = new FigureController();
+	static String input;
 
 	public static void menuSee() {
 		System.out.println("==================");
 		System.out.println("도형을 입력하세요(1.입력 2.조회  3.종료)");
 		System.out.println("입력 : ");
+		input = MenuBar.scan.next();
 	}
 
-}
-public class Study0127 {
-
-	public static void main(String[] args) {
-		FigureController fgcon=new FigureController();
-		MenuBar.menuSee();
-		
-		String input=MenuBar.scan.next();
-		
-		switch(input){
+	public static void menuKey() {
+		switch (input) {
 		case "1":
 			fgcon.figureInput();
-			//MenuBar.menuSee();
+			break;
 		case "2":
 			fgcon.searchFigure();
 			break;
@@ -34,3 +29,10 @@ public class Study0127 {
 	}
 }
 
+public class Study0127 {
+
+	public static void main(String[] args) {
+		MenuBar.menuSee();
+		MenuBar.menuKey();
+	}
+}
