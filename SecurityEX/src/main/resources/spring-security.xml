@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans.xsd
+					http://www.springframework.org/schema/security
+					http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<!-- 시큐리티와 관련된 설정을 처리함 -->
+	<sec:http use-expressions="true">
+		<!-- 접근권한 설정 pattern:접근경로, access:해당경로에 접근 가능자-->
+		<sec:intercept-url pattern="/admin/**"
+			access="hasAuthority('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/manager/**"
+			access="hasRole('ROLE_MANAGER')"/>
+		<sec:intercept-url pattern="/member/**" 
+			access="isAuthenticated()"/>
+		<sec:intercept-url pattern="/**" access="permitAll"/>
+		<!-- 인증된 사용자만 허용되는 자원에 접근,로그인폼에서 아이디/패스워드를 전송하면 로그인 처리 -->
+		<sec:form-login/>
+		<!-- 로그아웃 -->
+		<sec:logout/>
+	</sec:http>
+	
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="rose" password="1111"
+					authorities="ROLE_USER"/>
+				<sec:user name="manager" password="1111"
+					authorities="ROLE_MANAGER"/>
+				<sec:user name="admin" password="0000"
+					authorities="ROLE_ADMIN,ROLE_USER"/>     
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+
+</beans>
